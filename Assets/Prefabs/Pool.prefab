@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1095886585163652671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1095886585163652609}
+  - component: {fileID: 1095886585163652608}
+  m_Layer: 0
+  m_Name: Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1095886585163652609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095886585163652671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1095886585163652608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095886585163652671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c96408a32b70b34b9b8f8ad1cfe3b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabs:
+  - {fileID: 5733573494091709962, guid: 774f3fdfbbe7e714e8bdecf50f83928d, type: 3}
+  - {fileID: 3547531744972677769, guid: ae0e235710923f04db6dac92011640bb, type: 3}
+  - {fileID: 1912612192091735511, guid: ad97b322f1597dd409d5488af6dfc945, type: 3}
+  - {fileID: 5891467247913950093, guid: 8e538af13d70b37469e8fb85d5403108, type: 3}
+  - {fileID: 6227382536161493518, guid: 24acf4a5d8be0884fb7bd9a05f106a97, type: 3}
+  - {fileID: 799322045403773265, guid: c9939e4cd44db314baa54732ea27f4f6, type: 3}
+  - {fileID: 1469281771968558558, guid: ac1efc191d2915044bf9758326290538, type: 3}
+  - {fileID: 60337934919669299, guid: b0a387e6072ffc3408cc89349b56cb96, type: 3}
+  - {fileID: 5967258615824420683, guid: d82768a195626af4285117d03a2af18e, type: 3}
