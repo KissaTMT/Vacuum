@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6533982580612939014}
   - component: {fileID: 4965595593401536735}
   - component: {fileID: 7323979117803347119}
+  - component: {fileID: 2991929250128192850}
   m_Layer: 8
   m_Name: HomingLazer3
   m_TagString: Untagged
@@ -153,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 1
+  _isPoolObject: 0
 --- !u!114 &7323979117803347119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,5 +165,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 666d13fef309a8d41a1cd4e462af5f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2991929250128192850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371103886619490416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2bf60917724d744b7d3041287a7ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

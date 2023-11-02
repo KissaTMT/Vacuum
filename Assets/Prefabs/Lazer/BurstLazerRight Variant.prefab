@@ -132,6 +132,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6111426480008217984, guid: cbf8b2a4df83a0a4597465b0486a9de3, type: 3}
+      propertyPath: b_explosion
+      value: 
+      objectReference: {fileID: 60337934919669299, guid: b0a387e6072ffc3408cc89349b56cb96, type: 3}
+    - target: {fileID: 6111426480008217984, guid: cbf8b2a4df83a0a4597465b0486a9de3, type: 3}
       propertyPath: b_isFromGun
       value: 0
       objectReference: {fileID: 0}

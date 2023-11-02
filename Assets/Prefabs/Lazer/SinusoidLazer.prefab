@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 315185214985527410}
   - component: {fileID: 5165698617701883351}
   - component: {fileID: 7841470382726266370}
+  - component: {fileID: 2578760908362216484}
   m_Layer: 8
   m_Name: SinusoidLazer
   m_TagString: Untagged
@@ -155,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 2
+  _isPoolObject: 0
 --- !u!114 &7841470382726266370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,5 +167,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 666d13fef309a8d41a1cd4e462af5f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2578760908362216484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315185214985527413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2bf60917724d744b7d3041287a7ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

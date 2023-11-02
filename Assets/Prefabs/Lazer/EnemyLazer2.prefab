@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6161549380235335121}
   - component: {fileID: -4987924897314072092}
   - component: {fileID: 3826741408088891536}
+  - component: {fileID: 5755196559199496521}
   m_Layer: 8
   m_Name: EnemyLazer2
   m_TagString: Untagged
@@ -104,7 +105,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.07, y: 6.9723897}
+    oldSize: {x: 5.07, y: 7.682633}
     newSize: {x: 4.3909345, y: 17.18}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -163,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 1
+  _isPoolObject: 0
 --- !u!114 &3826741408088891536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,5 +175,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 666d13fef309a8d41a1cd4e462af5f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5755196559199496521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830480114957130713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2bf60917724d744b7d3041287a7ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

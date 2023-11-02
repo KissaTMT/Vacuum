@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6434441057162263245}
   - component: {fileID: -6273059554534611005}
   - component: {fileID: 1724581993500399037}
+  - component: {fileID: 4635579224636887136}
   m_Layer: 9
   m_Name: BlackHole
   m_TagString: Untagged
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b4073f6d53ba14d99ca31c65828caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 40
+  _rotateSpeed: 50
   _isInverse: 0
 --- !u!114 &6434441057162263245
 MonoBehaviour:
@@ -171,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 25
+  _isPoolObject: 0
 --- !u!114 &-6273059554534611005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +200,18 @@ MonoBehaviour:
   _mask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4635579224636887136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8432411422536033531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2bf60917724d744b7d3041287a7ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8432411422612369249
 GameObject:
   m_ObjectHideFlags: 0

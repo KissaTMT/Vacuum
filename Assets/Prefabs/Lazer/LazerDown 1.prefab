@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3521284718313353323}
   - component: {fileID: 7644307052726991123}
   - component: {fileID: 4716474429393328838}
+  - component: {fileID: 2144486793371542723}
   m_Layer: 8
   m_Name: LazerDown 1
   m_TagString: Untagged
@@ -153,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 1
+  _isPoolObject: 0
 --- !u!114 &4716474429393328838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,5 +165,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 666d13fef309a8d41a1cd4e462af5f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2144486793371542723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3024716962278933681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be2bf60917724d744b7d3041287a7ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
