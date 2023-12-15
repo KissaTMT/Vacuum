@@ -38,14 +38,14 @@ public class InvertTargeting : MorningCache,IRun
     private void Ternsite(Vector2 targetPosition)
     {
         _target = null;
-
+        transform.parent = null;
         transform.position = new Vector2(targetPosition.x, transform.position.y);
 
         StartCoroutine(GunOff());
     }
     private IEnumerator GunOff()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1);
         _gun.SetActive(false);
     }
 }

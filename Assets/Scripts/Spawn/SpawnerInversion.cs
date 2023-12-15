@@ -33,42 +33,47 @@ public class SpawnerInversion : MonoBehaviour
         _scoreToBoss = SceneDataSaver.LoadInt(SCORE_TO_BOSS, 100);
         _changer = ChangerLocation.instance;
         _mainGun = Player.instance.ComponentManager.MainGun;
-        _mainGun.Shooted += TryResurrection;
+        _mainGun.Shooted += (position) => StartCoroutine(TryResurrection(position));
         _transform = GetComponent<Transform>();
         _quaternionIdentity = Quaternion.identity;
         StartCoroutine(SpawnAsteroids());
         StartCoroutine(SpawnQueueBest());
     }
-
-    private void TryResurrection(Vector2 position)
+    private IEnumerator TryResurrection(Vector2 position)
     {
         var probability = Random.value;
         _counterShoots++;
         if (_currentEnemy == null && EnableSpawn)
         {
-            if (_counterShoots % 7 == 0 && _counterShoots % 4 != 0 &&  probability > 0.5f && probability < 0.9f && Player.instance.Transform.position.y < -1)
+            if(_counterShoots % 7 == 0 && _counterShoots % 4 != 0)
             {
-                StartCoroutine(ResurrectionEnemyRoutine(position));
-                _isRessurection = true;
-                return;
-            }
-            else if (_counterShoots % 7 == 0 && _counterShoots % 4 != 0 && GameStats.instance.Score >= _scoreToBoss && Mathf.Abs(Player.instance.Transform.position.x) < 1 && Player.instance.Transform.position.y < -0.5f)
-            {
-                StartCoroutine(ResurrectionBossRoutine());
-                _isRessurection = true;
-                return;
+                if (probability > 0.4f && probability < 0.8f && Player.instance.Transform.position.y < -1)
+                {
+                    _enableAsteroidSpawn = false;
+                    _isRessurection = true;
+                    StartCoroutine(ResurrectionEnemyRoutine(Random.Range(1, _objects[_changer.CurrentLocation].Count - 1), new Vector2(position.x, 3), _boom));
+                    yield break;
+                }
+                else if (GameStats.instance.Score >= _scoreToBoss && Mathf.Abs(Player.instance.Transform.position.x) < 0.5f && Player.instance.Transform.position.y < -0.5f)
+                {
+                    _enableAsteroidSpawn = false;
+                    _isRessurection = true;
+                    StartCoroutine(ResurrectionEnemyRoutine(_objects[_changer.CurrentLocation].Count - 1, new Vector2(0, 3.5f), _bigBoom));
+                    _scoreToBoss += Random.Range(150, 250);
+                    yield break;
+                }
             }
             else if (_counterShoots % 4 == 0  && _counterShoots % 7 != 0 && _enableAsteroidSpawn)
             {
                 StartCoroutine(ResurrectionAsteroidRoutine(position));
-                return;
+                yield break;
             }
         }
     }
 
     private void OnDisable()
     {
-        _mainGun.Shooted -= TryResurrection;
+        _mainGun.Shooted -= (position) => StartCoroutine(TryResurrection(position));
         SceneDataSaver.SaveInt(SCORE_TO_BOSS, (int)GameStats.instance.Score + _scoreToBoss);
     }
     private IEnumerator SpawnAsteroids()
@@ -80,40 +85,20 @@ public class SpawnerInversion : MonoBehaviour
             if (_currentEnemy == null && _enableAsteroidSpawn && EnableSpawn) ObjectPooling.instance.GetItem(_objects[_changer.CurrentLocation][0], new Vector2(Random.Range(-2.2f, 2.2f), _transform.position.y),_quaternionIdentity);
         }
     }
-    private IEnumerator ResurrectionEnemyRoutine(Vector2 vector)
+    private IEnumerator ResurrectionEnemyRoutine(int enemyIndex,Vector2 position,GameObject boom)
     {
-        _enableAsteroidSpawn = false;
-
-        var position = new Vector2(vector.x, 3);
-        var distanceModifier = Mathf.Abs(3-Player.instance.transform.position.y);
-
+        var distanceModifier = Mathf.Abs(position.y - Player.instance.transform.position.y);
         yield return new WaitForSeconds(distanceModifier/8 - 0.5f);
-
-        StartCoroutine(SpawnWithExplosionRoutine(_objects[_changer.CurrentLocation][Random.Range(1, _objects[_changer.CurrentLocation].Count - 1)], _boom, position));
-    }
-    private IEnumerator ResurrectionBossRoutine()
-    {
-        _enableAsteroidSpawn = false;
-
-        var position = new Vector2(0, 3.5f);
-        var distanceModifier = Mathf.Abs(3.5f - Player.instance.transform.position.y);
-
-        yield return new WaitForSeconds(distanceModifier / 8 - 0.5f);
-
-        StartCoroutine(SpawnWithExplosionRoutine(_objects[_changer.CurrentLocation][_objects[_changer.CurrentLocation].Count - 1], _bigBoom, position));
-        _scoreToBoss += Random.Range(150, 250);
+        yield return StartCoroutine(SpawnWithExplosionRoutine(_objects[_changer.CurrentLocation][enemyIndex], boom, position));
+        yield return new WaitUntil(() => _currentEnemy == null);
+        _isRessurection = false;
     }
     private IEnumerator ResurrectionAsteroidRoutine(Vector2 vector)
     {
-        var posX = vector.x;
         var distanceModifier = Random.Range(4f, 6f);
-        var posY = Player.instance.Transform.position.y + distanceModifier;
-        var position = new Vector2(posX, posY);
-        var delay = distanceModifier / 8 - 0.5f;
-        yield return new WaitForSeconds(delay);
-        InitiateBoom(_boom, position);
-        yield return new WaitForSeconds(0.5f);
-        ObjectPooling.instance.GetItem(_objects[_changer.CurrentLocation][0], position, _quaternionIdentity);
+        var position = new Vector2(vector.x, Player.instance.Transform.position.y + distanceModifier);
+        yield return new WaitForSeconds(distanceModifier / 8 - 0.5f);
+        StartCoroutine(SpawnWithExplosionRoutineFromPool(_objects[_changer.CurrentLocation][0],_boom,position));
     }
     private IEnumerator SpawnQueueBest()
     {
@@ -127,7 +112,7 @@ public class SpawnerInversion : MonoBehaviour
             {
                 var probability = Random.value;
                 _enableHyperdrive = true;
-                if (_currentEnemy == null && !_isRessurection)
+                if (_currentEnemy == null && _isRessurection == false)
                 {
                     if (!_enableAsteroidSpawn)
                     {
@@ -135,11 +120,10 @@ public class SpawnerInversion : MonoBehaviour
                         else
                         {
                             _enableAsteroidSpawn = true;
-                            _isRessurection = false;
                             yield return new WaitForSeconds(Random.Range(6, 12));
                         }
                     }
-                    if (probability > 0.9f)
+                    if (_isRessurection == false && probability > 0.9f)
                     {
                         _enableAsteroidSpawn = false;
                         _currentEnemy = Spawn(_ternsiteHole, Random.Range(-1.6f, 1.6f), 8);
@@ -184,6 +168,12 @@ public class SpawnerInversion : MonoBehaviour
         if(enemyPrefab.TryGetComponent(out Wave wave) == false) InitiateBoom(explosionPrefab, position);
         yield return new WaitForSeconds(0.5f);
         _currentEnemy = Spawn(enemyPrefab,position);
+    }
+    private IEnumerator SpawnWithExplosionRoutineFromPool(GameObject enemyPrefab, GameObject explosionPrefab, Vector2 position)
+    {
+        InitiateBoom(explosionPrefab, position);
+        yield return new WaitForSeconds(0.5f);
+        ObjectPooling.instance.GetItem(enemyPrefab, position, _quaternionIdentity);
     }
     private IEnumerator SpawnWithExplosionRoutine(GameObject enemyPrefab, GameObject explosionPrefab, Vector2 position, float delay)
     {

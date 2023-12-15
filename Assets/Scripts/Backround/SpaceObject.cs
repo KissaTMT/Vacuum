@@ -18,7 +18,7 @@ public class SpaceObject : MonoBehaviour
     protected virtual void OnDisable() => ObjectManager.instance.SpaceObjects.Remove(gameObject);
     protected void Shade(float size)
     {
-        var shader = 0.375f*size + 0.625f;
+        var shader = 0.375f * size + 0.625f;
         b_renderer.color = new Color(shader, shader, shader);
     }
     private void Awake()

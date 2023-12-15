@@ -54,25 +54,24 @@ public class Player : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
-        if(collision.TryGetComponent(out Snowflake snowflake))
+        if(collision.TryGetComponent(out Drop drop))
         {
-            GetBonus?.Invoke(snowflake);
-            Destroy(collision.gameObject);
-        }
-        if(collision.TryGetComponent(out Crystal crystal))
-        {
-            GetBonus?.Invoke(crystal);
-            Destroy(collision.gameObject);
-        }
-        if(collision.TryGetComponent(out Bonus bonus))
-        {
-            if (bonus.IsInverse) return;
+            if(drop is Crystal ||  drop is Snowflake)
+            {
+                GetBonus?.Invoke(drop);
+                Destroy(collision.gameObject);
+            }
+            else if(drop is Bonus bonus)
+            {
+                if (bonus.IsInverse) return;
 
-            var index = bonus.ID;
-            GetBerk?.Invoke(index);
-            if (index < 3) _componentManager.InitiateManageBonus(index);
-            if (index == 5) _componentManager.InitiateHyperdriveFlight();
-            Destroy(collision.gameObject);
+                var index = bonus.ID;
+                GetBerk?.Invoke(index);
+                if (index < 3) _componentManager.InitiateManageBonus(index);
+                if (index == 5) _componentManager.InitiateHyperdriveFlight();
+                Destroy(collision.gameObject);
+            }
+            
         }
     }
 }

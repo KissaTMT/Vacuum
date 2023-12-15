@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826139039934313133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -50, z: 0}
+  m_LocalPosition: {x: 0, y: 150, z: 0}
   m_LocalScale: {x: 50, y: 15, z: 0}
   m_Children: []
   m_Father: {fileID: 1826139040624431299}
@@ -140,7 +140,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 6}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -151,7 +151,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 14}
+  m_Size: {x: 20, y: 30}
   m_EdgeRadius: 0
 --- !u!50 &1826139039934313132
 Rigidbody2D:
@@ -434,6 +434,7 @@ MonoBehaviour:
   - {fileID: 5933737201339514247}
   - {fileID: 595485070901733559}
   _gun: {fileID: 1707930478453430568}
+  _rodar: {fileID: 1826139039934313129}
   _barier: -3
 --- !u!114 &-3092161919600197427
 MonoBehaviour:

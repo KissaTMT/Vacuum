@@ -13,8 +13,8 @@ public class Planet : SpaceObject
         b_renderer.sortingOrder = (int)(b_size * 100);
         Shade(b_size);
         _speed = b_size * (SPEED + b_size / 5);
-        StartCoroutine(Flight());
-        StartCoroutine(Boom(b_size));
+        StartCoroutine(FlightRoutine());
+        StartCoroutine(DestroyRoutine(b_size));
     }
     protected override void OnEnable()
     {
@@ -26,7 +26,7 @@ public class Planet : SpaceObject
         base.OnDisable();
         BackroundGenerator.countOfPlanets--;
     }
-    private IEnumerator Flight()
+    private IEnumerator FlightRoutine()
     {
         while (b_transform.position.y > -11)
         {
@@ -34,7 +34,7 @@ public class Planet : SpaceObject
             yield return null;
         }
     }
-    private IEnumerator Boom(float size)
+    private IEnumerator DestroyRoutine(float size)
     {
         yield return new WaitForSeconds(20 / size);
         Destroy(gameObject);

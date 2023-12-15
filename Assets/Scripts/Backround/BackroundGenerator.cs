@@ -79,7 +79,7 @@ public class BackroundGenerator : MonoBehaviour
     private void SpawnPlanet(float posY, bool isSomePlanet = false)
     {
         var planet = (Planet)Spawn(_planet, Random.Range(MIN_X_LIMIT, MAX_X_LIMIT), posY);
-        var size = Random.Range(0.2f, 1);
+        var size = Random.Range(0.1f, 1);
         if (isSomePlanet)
         {
             while (true)

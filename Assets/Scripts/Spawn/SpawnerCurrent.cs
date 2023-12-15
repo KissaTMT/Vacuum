@@ -46,35 +46,37 @@ namespace Legacy
 
                 if (EnableSpawn)
                 {
-                    var kind = Random.value;
+                    var probability = Random.value;
 
                     if (_currentEnemy == null)
                     {
-                        if (GameStats.instance.Score >= _scoreToBoss)
-                        {
-                            _enableAsteroidSpawn = false;
-                            _currentEnemy = Spawn(_objects[_changer.CurrentLocation][_objects[_changer.CurrentLocation].Count - 1], 0, _transform.position.y);
-                            _scoreToBoss += Random.Range(150, 250);
-                        }
+                        if (GameStats.instance.Score >= _scoreToBoss) SpawnBoss();
                         else
                         {
                             if (_enableAsteroidSpawn == false) _enableAsteroidSpawn = true;
-                            if (kind > 0.5f && kind < 0.99f) _currentEnemy = Spawn(_objects[_changer.CurrentLocation][Random.Range(1, _objects[_changer.CurrentLocation].Count - 1)], Random.Range(-1.6f, 1.6f), _transform.position.y);
-                            if (kind > 0.998f)
-                            {
-                                _enableAsteroidSpawn = false;
-                                yield return delay;
-                                var posX = Random.Range(-1.6f, 1.6f);
-                                _currentEnemy = Spawn(_invertedPlayer, posX, -6);
-                                yield return new WaitForSeconds(Random.Range(8, 14));
-                                Spawn(_redHole, posX, _transform.position.y);
-                            }
+                            if (probability > 0.5f && probability < 0.99f) _currentEnemy = Spawn(_objects[_changer.CurrentLocation][Random.Range(1, _objects[_changer.CurrentLocation].Count - 1)], Random.Range(-1.6f, 1.6f), _transform.position.y);
+                            if (probability > 0.998f) StartCoroutine(SpawnInvertedPlayerRoutine(delay));
                         }
-                        if (kind > 0.99f && kind < 0.998f) Spawn(_hole, Random.Range(-2.2f, 2.2f), _transform.position.y);
+                        if (probability > 0.99f && probability < 0.998f) Spawn(_hole, Random.Range(-2.2f, 2.2f), _transform.position.y);
                     }
                 }
                 else yield return StartCoroutine(GenerateCrystal());
             }
+        }
+        private void SpawnBoss()
+        {
+            _enableAsteroidSpawn = false;
+            _currentEnemy = Spawn(_objects[_changer.CurrentLocation][_objects[_changer.CurrentLocation].Count - 1], 0, _transform.position.y);
+            _scoreToBoss += Random.Range(150, 250);
+        }
+        private IEnumerator SpawnInvertedPlayerRoutine(WaitForSeconds delay)
+        {
+            _enableAsteroidSpawn = false;
+            yield return delay;
+            var posX = Random.Range(-1.6f, 1.6f);
+            _currentEnemy = Spawn(_invertedPlayer, posX, -6);
+            yield return new WaitForSeconds(Random.Range(8, 14));
+            Spawn(_redHole, posX, _transform.position.y);
         }
         private IEnumerator GenerateCrystal()
         {

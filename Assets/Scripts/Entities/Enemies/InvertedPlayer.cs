@@ -10,9 +10,19 @@ public class InvertedPlayer : Enemy
     public bool IsInverse;
     [SerializeField] private GameObject[] _sprites;
     [SerializeField] private PlayerGun _gun;
+    [SerializeField] private Rodar _rodar;
     [SerializeField] private float _barier;
 
     private Vector2 _targetPosition;
+    private void OnEnable()
+    {
+        _rodar.CatchLazer += (position) => _targetPosition = position;
+    }
+    private void OnDisable()
+    {
+        _rodar.CatchLazer -= (position) => _targetPosition = position;
+    }
+
 
     private void Start()
     {
@@ -28,7 +38,7 @@ public class InvertedPlayer : Enemy
         {
             if (Mathf.Abs(b_transform.position.y - _barier) < 0.05f)
             {
-                var actualTarget = new Vector2(Rodar.targetPosition.x, b_transform.position.y);
+                var actualTarget = new Vector2(_targetPosition.x, b_transform.position.y);
                 _gun.EnableShoot = true;
                 b_transform.position = Vector2.Lerp(b_transform.position, actualTarget, 20 * Time.deltaTime);
             }
